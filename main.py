@@ -1,8 +1,7 @@
-import logging
-import logging.handlers
-import os
+import pandas as pd
+import datetime as datetime
 
-import requests
+import logging.handlers
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -16,19 +15,14 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
-try:
-    SOME_SECRET = os.environ["SOME_SECRET"]
-except KeyError:
-    SOME_SECRET = "Token not available!"
-    #logger.info("Token not available!")
-    #raise
+def test_function():
+
+    now = datetime.datetime.now()
+    logger.info(f'Latest successful run: {now}')
+
+    return None
 
 
 if __name__ == "__main__":
-    logger.info(f"Token value: {SOME_SECRET}")
 
-    r = requests.get('https://weather.talkpython.fm/api/weather/?city=Berlin&country=DE')
-    if r.status_code == 200:
-        data = r.json()
-        temperature = data["forecast"]["temp"]
-        logger.info(f'Weather in Berlin: {temperature}')
+    test_function()
